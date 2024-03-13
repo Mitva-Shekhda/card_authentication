@@ -83,42 +83,28 @@ class AddCardScreen extends StatelessWidget {
       billingDate: billingDateController.text,
     );
 
-    // Instantiate the DatabaseHelper
-    //DatabaseHelper databaseHelper = DatabaseHelper();
+    DatabaseHelper databaseHelper = DatabaseHelper();
 
-    // Insert the card data into the SQLite database
     int result = await DatabaseHelper.instance.insertCard(card);
 
-    // if (result != 0) {
-    //   // Data inserted successfully
-    //   print('result$result');
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Card added successfully')),
-    //   );
-    //
-    //   // Clear text controllers
-    //   cardNumberController.clear();
-    //   cardCompanyController.clear();
-    //   totalLimitController.clear();
-    //   totalOutstandingController.clear();
-    //   billingDateController.clear();
-    //
-    //   // Navigate to the show details screen
-    //   // Navigator.push(
-    //   //   context,
-    //   //   MaterialPageRoute(builder: (context) => ShowDetailsScreen()),
-    //   // );
-    // } else {
-    //   // Failed to insert data
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Failed to add card')),
-    //   );
-    // }
-    // // Schedule notifications
-    // DateTime selectedDate = DateTime
-    //     .now();
-    // scheduleDueDateNotification(selectedDate);
-    // scheduleThreeDaysBeforeNotification(selectedDate);
+    if (result != 0) {
+      // Data inserted successfully
+      //print('result' $result);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Card added successfully')),
+      );
+      cardNumberController.clear();
+      cardCompanyController.clear();
+      totalLimitController.clear();
+      totalOutstandingController.clear();
+      billingDateController.clear();
+
+    } else {
+      // Failed to insert data
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add card')),
+      );
+    }
   }
 
   void requestNotificationPermission() async {
@@ -346,8 +332,8 @@ class AddCardScreen extends StatelessWidget {
     }
   }
 }
-void main() {
-  runApp(YourApp());
+
+class _instance {
 }
 
 
